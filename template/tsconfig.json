@@ -1,0 +1,3 @@
+{
+  "extends": "@bakerface/typescript-starter/tsconfig"
+}
