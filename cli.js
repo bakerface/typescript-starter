@@ -2,6 +2,7 @@
 
 const cp = require("child_process");
 const fs = require("fs");
+const os = require("os");
 const path = require("path");
 const util = require("util");
 const { version } = require("./package.json");
@@ -77,6 +78,11 @@ async function createProject(name) {
   };
 
   await createTemplateRecursive(vars, path.join(__dirname, "template"), name);
+
+  const ignored = [".nyc_output", "coverage", "dist", "node_modules"];
+  const gitignore = ignored.join(os.EOL);
+
+  await writeFileAsync(path.join(name, ".gitignore"), gitignore);
 }
 
 async function main() {
