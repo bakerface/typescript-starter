@@ -1,13 +1,18 @@
+import path from "path";
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
+import json from "@rollup/plugin-json";
 import ts from "@wessberg/rollup-plugin-ts";
 import builtins from "builtins";
 import { terser } from "rollup-plugin-terser";
 
-function createConfiguration(mode) {
-  const name = process.env.npm_package_name || "";
-  const version = process.env.npm_package_version || "";
+function basename(file = "") {
+  return path.basename(file).split(".").shift();
+}
+
+function createConfiguration(options, mode) {
+  const name = basename(options.i, ".ts");
   const suffix = mode === "production" ? ".min" : "";
 
   const output = [
@@ -17,11 +22,16 @@ function createConfiguration(mode) {
 
   const plugins = [
     replace({
-      "process.env.npm_package_name": JSON.stringify(name),
-      "process.env.npm_package_version": JSON.stringify(version),
+      "process.env.npm_package_name": JSON.stringify(
+        process.env.npm_package_name
+      ),
+      "process.env.npm_package_version": JSON.stringify(
+        process.env.npm_package_version
+      ),
     }),
     resolve(),
     commonjs(),
+    json(),
     ts(),
   ];
 
@@ -48,4 +58,9 @@ function createConfiguration(mode) {
   };
 }
 
-export default [createConfiguration(), createConfiguration("production")];
+export default function (options) {
+  return [
+    createConfiguration(options),
+    createConfiguration(options, "production"),
+  ];
+}

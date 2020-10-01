@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "declaration": true,
+    "esModuleInterop": true,
     "jsx": "react",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
@@ -16,4 +17,3 @@
     "target": "es5"
   }
 }
-

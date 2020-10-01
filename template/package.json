@@ -2,9 +2,9 @@
   "name": "{{name}}",
   "version": "0.0.0",
   "private": true,
-  "main": "dist/{{name}}.js",
-  "module": "dist/{{name}}.mjs",
-  "types": "dist/{{name}}.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "eslintConfig": {
     "extends": "./node_modules/@bakerface/typescript-starter/eslint"
   },
@@ -12,7 +12,7 @@
     "extends": "@bakerface/typescript-starter/nyc"
   },
   "scripts": {
-    "build": "typescript-starter build src/index.ts",
+    "prepare": "typescript-starter build src/index.ts",
     "lint": "typescript-starter lint .",
     "test": "typescript-starter test 'src/**/*.test.*'"
   },
