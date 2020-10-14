@@ -5,7 +5,9 @@ import replace from "@rollup/plugin-replace";
 import json from "@rollup/plugin-json";
 import ts from "@wessberg/rollup-plugin-ts";
 import builtins from "builtins";
+import shebang from "rollup-plugin-add-shebang";
 import { terser } from "rollup-plugin-terser";
+import optionalRequire from "./src/rollup-plugin-optional-require";
 
 function basename(file = "") {
   return path.basename(file).split(".").shift();
@@ -21,6 +23,7 @@ function createConfiguration(options, mode) {
   ];
 
   const plugins = [
+    optionalRequire(),
     replace({
       "process.env.npm_package_name": JSON.stringify(
         process.env.npm_package_name
@@ -47,6 +50,14 @@ function createConfiguration(options, mode) {
     plugins.push(
       terser({
         mangle: { toplevel: true },
+      })
+    );
+  }
+
+  for (const o of output) {
+    plugins.push(
+      shebang({
+        include: [o.file],
       })
     );
   }

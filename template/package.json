@@ -17,6 +17,6 @@
     "test": "typescript-starter test 'src/**/*.test.*'"
   },
   "devDependencies": {
-    "@bakerface/typescript-starter": "^{{version}}"
+    "@bakerface/typescript-starter": "{{version}}"
   }
 }
