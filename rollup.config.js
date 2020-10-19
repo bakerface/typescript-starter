@@ -5,7 +5,7 @@ import replace from "@rollup/plugin-replace";
 import json from "@rollup/plugin-json";
 import ts from "@wessberg/rollup-plugin-ts";
 import builtins from "builtins";
-import shebang from "rollup-plugin-add-shebang";
+// import shebang from "rollup-plugin-add-shebang";
 import { terser } from "rollup-plugin-terser";
 import optionalRequire from "./src/rollup-plugin-optional-require";
 
@@ -54,13 +54,13 @@ function createConfiguration(options, mode) {
     );
   }
 
-  for (const o of output) {
-    plugins.push(
-      shebang({
-        include: [o.file],
-      })
-    );
-  }
+  // for (const o of output) {
+  //   plugins.push(
+  //     shebang({
+  //       include: [o.file],
+  //     })
+  //   );
+  // }
 
   return {
     output,
