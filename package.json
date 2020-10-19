@@ -1,6 +1,6 @@
 {
   "name": "@bakerface/typescript-starter",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Create a typescript project",
   "author": "Chris Baker <mail.chris.baker@gmail.com>",
   "license": "MIT",
