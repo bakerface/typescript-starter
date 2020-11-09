@@ -1,4 +1,3 @@
-import path from "path";
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
@@ -9,17 +8,22 @@ import builtins from "builtins";
 import { terser } from "rollup-plugin-terser";
 import optionalRequire from "./src/rollup-plugin-optional-require";
 
-function basename(file = "") {
-  return path.basename(file).split(".").shift();
-}
-
-function createConfiguration(options, mode) {
-  const name = basename(options.i, ".ts");
+function createConfiguration(_options, mode) {
   const suffix = mode === "production" ? ".min" : "";
 
   const output = [
-    { format: "cjs", file: `dist/${name}${suffix}.js` },
-    { format: "es", file: `dist/${name}${suffix}.mjs` },
+    {
+      format: "cjs",
+      dir: "dist",
+      entryFileNames: `[name]${suffix}.js`,
+      chunkFileNames: `[name]-[hash]${suffix}.js`,
+    },
+    {
+      format: "es",
+      dir: "dist",
+      entryFileNames: `[name]${suffix}.mjs`,
+      chunkFileNames: `[name]-[hash]${suffix}.mjs`,
+    },
   ];
 
   const plugins = [
