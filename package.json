@@ -1,11 +1,13 @@
 {
   "name": "@bakerface/typescript-starter",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Create a typescript project",
   "author": "Chris Baker <mail.chris.baker@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/bakerface/typescript-starter#readme",
-  "bin": "index.js",
+  "bin": {
+    "typescript-starter": "index.js"
+  },
   "keywords": [
     "typescript",
     "starter"
