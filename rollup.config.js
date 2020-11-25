@@ -1,3 +1,4 @@
+import fs from "fs";
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
@@ -7,6 +8,10 @@ import builtins from "builtins";
 // import shebang from "rollup-plugin-add-shebang";
 import { terser } from "rollup-plugin-terser";
 import optionalRequire from "./src/rollup-plugin-optional-require";
+
+const packageJson = JSON.parse(fs.readFileSync("package.json"));
+const peerDependencies = Object.keys(packageJson.peerDependencies || {});
+const external = builtins().concat(peerDependencies);
 
 function createConfiguration(_options, mode) {
   const suffix = mode === "production" ? ".min" : "";
@@ -66,11 +71,7 @@ function createConfiguration(_options, mode) {
   //   );
   // }
 
-  return {
-    output,
-    external: builtins(),
-    plugins,
-  };
+  return { output, external, plugins };
 }
 
 export default function (options) {
