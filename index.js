@@ -17,6 +17,7 @@ const writeFileAsync = util.promisify(fs.writeFile);
 function spawn(command, ...args) {
   return new Promise((resolve, reject) => {
     const proc = cp.spawn(command, args, {
+      shell: true,
       env: process.env,
       stdio: "inherit",
     });
