@@ -12,7 +12,8 @@
     "extends": "@bakerface/typescript-starter/nyc"
   },
   "scripts": {
-    "prepare": "typescript-starter build src/index.ts",
+    "build": "typescript-starter build src/index.ts",
+    "dev": "typescript-starter dev src/index.ts",
     "lint": "typescript-starter lint .",
     "test": "typescript-starter test 'src/**/*.test.*'"
   },

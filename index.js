@@ -89,9 +89,17 @@ async function createProject(name) {
 async function main() {
   const [command, ...args] = process.argv.slice(2);
 
+  if (command === "create") {
+    return createProject(...args);
+  }
+
   if (command === "build") {
     const config = path.join(__dirname, "rollup.config.js");
     return spawn("rollup", "--config", config, "-i", ...args);
+  }
+
+  if (command === "dev") {
+    return spawn("ts-node-dev", "--respawn", ...args);
   }
 
   if (command === "lint") {
@@ -100,10 +108,6 @@ async function main() {
 
   if (command === "test") {
     return spawn("nyc", "mocha", ...args);
-  }
-
-  if (command === "create") {
-    return createProject(...args);
   }
 
   throw new Error(`Unrecognized command "${command}"`);
