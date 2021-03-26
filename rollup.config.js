@@ -51,6 +51,7 @@ function createConfiguration(_options, mode) {
   if (mode) {
     plugins.push(
       replace({
+        preventAssignment: true,
         "process.env.NODE_ENV": JSON.stringify(mode),
       })
     );
