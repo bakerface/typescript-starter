@@ -34,6 +34,7 @@ function createConfiguration(_options, mode) {
   const plugins = [
     optionalRequire(),
     replace({
+      preventAssignment: true,
       "process.env.npm_package_name": JSON.stringify(
         process.env.npm_package_name
       ),
